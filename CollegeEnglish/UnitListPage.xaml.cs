@@ -24,12 +24,12 @@ namespace CollegeEnglish
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HomePage : Page
+    public sealed partial class UnitListPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public HomePage()
+        public UnitListPage()
         {
             this.InitializeComponent();
 
@@ -68,8 +68,9 @@ namespace CollegeEnglish
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var sampleDataBooks = await BookListDataSource.GetBooksAsync();
-            this.DefaultViewModel["Books"] = sampleDataBooks;
+            string bookId = (string)e.NavigationParameter;
+            var bookUnits = await UnitTitleDataSource.GetUnitTitlesAsync(bookId:bookId);
+            this.DefaultViewModel["UnitTitles"] = bookUnits;
         }
 
         /// <summary>
@@ -113,12 +114,7 @@ namespace CollegeEnglish
 
         private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var uniqueId = ((Book)e.ClickedItem).UniqueId;
-
-            if (!Frame.Navigate(typeof(UnitListPage), uniqueId))
-            {
-                throw new Exception("Navigation failed.");
-            }
+            throw new NotImplementedException();
         }
     }
 }

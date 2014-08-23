@@ -1,18 +1,18 @@
 {"Books":[
   {
-    "UniqueId": "Book-1",
+    "UniqueId": "1",
     "Title": "Book 1"
   },
   {
-    "UniqueId": "Book-2",
+    "UniqueId": "2",
     "Title": "Book 2"
   },
   {
-    "UniqueId": "Book-3",
+    "UniqueId": "3",
     "Title": "Book 3"
   },
   {
-    "UniqueId": "Book-4",
+    "UniqueId": "4",
     "Title": "Book 4"
   }
 ]

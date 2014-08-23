@@ -84,6 +84,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UnitListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -92,12 +96,19 @@
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\StorageDataHelper.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="DataModel\BookListDataSource.cs" />
+    <Compile Include="DataModel\Course.cs" />
+    <Compile Include="DataModel\NewWord.cs" />
+    <Compile Include="DataModel\UnitTitleDataSource.cs" />
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitListPage.xaml.cs">
+      <DependentUpon>UnitListPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

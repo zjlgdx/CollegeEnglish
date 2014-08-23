@@ -21,9 +21,20 @@
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\Splash-Warm-Tea-Cup.png" />
       </m3:VisualElements>
+      <Extensions>
+        <Extension Category="windows.fileTypeAssociation">
+          <FileTypeAssociation Name="wp.ce">
+            <SupportedFileTypes>
+              <FileType>.mp3</FileType>
+              <FileType>.json</FileType>
+            </SupportedFileTypes>
+          </FileTypeAssociation>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
     <Capability Name="internetClientServer" />
+    <Capability Name="removableStorage" />
   </Capabilities>
 </Package>
