@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Threading.Tasks;
 using Windows.Media.Playback;
 using Windows.UI.Popups;
 using CollegeEnglish.Common;
@@ -127,34 +128,7 @@ namespace CollegeEnglish
             var target = (Image)sender;
             var voice = target.Tag as string;
 
-            if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
-            {
-                BackgroundMediaPlayer.Current.Pause();
-            }
-            else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState || MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
-            {
-                var file = voice;
-
-                if (!string.IsNullOrEmpty(file))
-                {
-                    string[] fileInfo = new[] { "vocabulary", file };
-                    var message = new ValueSet
-                    {
-                        {
-                            "Play",
-                            fileInfo
-                        }
-
-                    };
-                    BackgroundMediaPlayer.SendMessageToBackground(message);
-                }
-                else
-                {
-                    MessageDialog md2 = new MessageDialog("No file to play!", "audio");
-                    await md2.ShowAsync();
-                }
-
-            }
+            await ReadVoice(voice);
         }
 
         private void ViewAppBarButton_Click(object sender, RoutedEventArgs e)
@@ -170,7 +144,46 @@ namespace CollegeEnglish
             }
         }
 
-        
+
+        private async void PlayAppBarButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            PivotItem pivotItem = (PivotItem)pivot.SelectedItem;
+            var flipView = pivotItem.Content as FlipView;
+            if (flipView != null)
+            {
+                var word = flipView.SelectedItem as NewWord;
+                await ReadVoice(word.WordVoice);
+            }
+        }
+
+        private static async Task ReadVoice(string voiceFile)
+        {
+            if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
+            {
+                BackgroundMediaPlayer.Current.Pause();
+            }
+            else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState ||
+                     MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
+            {
+                if (!string.IsNullOrEmpty(voiceFile))
+                {
+                    string[] fileInfo = new[] { "vocabulary", voiceFile };
+                    var message = new ValueSet
+                    {
+                        {
+                            "Play",
+                            fileInfo
+                        }
+                    };
+                    BackgroundMediaPlayer.SendMessageToBackground(message);
+                }
+                else
+                {
+                    MessageDialog md2 = new MessageDialog("No file to play!", "audio");
+                    await md2.ShowAsync();
+                }
+            }
+        }
     }
 
 

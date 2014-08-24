@@ -11,7 +11,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <dataModel:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        
+
         <DataTemplate x:Key="StandardFlipViewItemTemplate">
             <Grid>
                 <Border BorderBrush="#E36FAB" CornerRadius="15" Background="Teal"  BorderThickness="3"  Margin="10">
@@ -23,11 +23,7 @@
                         </Grid.RowDefinitions>
 
                         <Border Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Word}" FontFamily="Segoe UI" TextWrapping="Wrap"  Foreground="#CCFFFFFF" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
-                                <Image Source="Assets/Speaker.png" Stretch="None" Tapped="Voice_OnTapped" Tag="{Binding WordVoice}" />
-                            </StackPanel>
-                            
+                            <TextBlock Text="{Binding Word}" FontFamily="Segoe UI" TextWrapping="WrapWholeWords"  Foreground="#CCFFFFFF" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
                         </Border>
 
                         <Border Grid.Row="1" BorderBrush="#FF8800"  BorderThickness="0,3,0,0" Visibility="{Binding WordMeaningVisible, Converter={StaticResource BoolToVisibilityConverter}}">
@@ -40,7 +36,7 @@
                                 <Grid HorizontalAlignment="Left" Margin="5">
                                     <Image Source="Assets/Speaker.png" Stretch="None" Tapped="Voice_OnTapped" Tag="{Binding SentenceVoice}" />
                                 </Grid>
-                                
+
                             </StackPanel>
                         </Border>
                     </Grid>
@@ -97,7 +93,7 @@
                             </ItemsPanelTemplate>
                         </FlipView.ItemsPanel>
                     </FlipView>
-                    
+
                 </PivotItem>
 
 
@@ -129,7 +125,8 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton x:Uid="ViewAppBarButton" x:Name="ViewAppBarButton" Label="显示释义" Icon="View" Click="ViewAppBarButton_Click" />      
+            <AppBarButton x:Uid="PlayAppBarButton" x:Name="PlayAppBarButton" Label="单词读音" Icon="Audio"  Click="PlayAppBarButton_OnClick" />
+            <AppBarButton x:Uid="ViewAppBarButton" x:Name="ViewAppBarButton" Label="显示释义" Icon="View" Click="ViewAppBarButton_Click" />
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
