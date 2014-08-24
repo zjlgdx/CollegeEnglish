@@ -70,8 +70,8 @@ namespace CollegeEnglish.DataModel
             foreach (JsonValue bookValue in jsonArray)
             {
                 JsonObject unitObject = bookValue.GetObject();
-                UnitTitle unitTitle = new UnitTitle(unitObject["UnitID"].GetString(),
-                                                            unitObject["UnitName"].GetString(), "D:\\WP.CE\\"+ unitObject["UnitImage"].GetString());
+                UnitTitle unitTitle = new UnitTitle(unitObject["UnitID"].ToJsonString(),
+                                                            unitObject["UnitName"].ToJsonString(), unitObject["UnitImage"].ToJsonString("D:\\WP.CE\\"));
 
                 this.UnitTitles.Add(unitTitle);
             }

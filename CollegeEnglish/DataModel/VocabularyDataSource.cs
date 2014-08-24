@@ -31,19 +31,32 @@ namespace CollegeEnglish.DataModel
             JsonObject jsonObject = JsonObject.Parse(jsonText);
             JsonArray jsonArray = jsonObject["NewWords"].GetArray();
 
-            this.Course = new Course { CourseId = jsonObject["CourseId"].GetString(), CourseName = jsonObject["CourseName"].GetString(), NewWords = new List<NewWord>()};
+            this.Course = new Course { CourseId = jsonObject["CourseId"].ToJsonString(), CourseName = jsonObject["CourseName"].ToJsonString(), NewWords = new List<NewWord>() };
 
             foreach (JsonValue wordValue in jsonArray)
             {
                 JsonObject unitObject = wordValue.GetObject();
-                NewWord newWord = new NewWord(unitObject["WordId"].GetString(),unitObject["Word"].GetString(),
-                    "D:\\WP.CE\\" + unitObject["WordVoice"].GetString(),
-                     unitObject["WordPhrase"].GetString(),
-                     unitObject["Sentence"].GetString(),
-                    "D:\\WP.CE\\" + unitObject["SentenceVoice"].GetString());
+                NewWord newWord = new NewWord(unitObject["WordId"].ToJsonString(), unitObject["Word"].ToJsonString(),
+                     unitObject["WordVoice"].ToJsonString("D:\\WP.CE\\"),
+                     unitObject["WordPhrase"].ToJsonString(),
+                     unitObject["Sentence"].ToJsonString(),
+                     unitObject["SentenceVoice"].ToJsonString("D:\\WP.CE\\"));
 
                 this.Course.NewWords.Add(newWord);
             }
+        }
+    }
+
+    public static class JsonStringExtension
+    {
+        public static string ToJsonString(this IJsonValue obj, string preString = "")
+        {
+            if (obj == null || obj.ValueType == JsonValueType.Null)
+            {
+                return string.Empty;
+            }
+
+            return preString + obj.GetString();
         }
     }
 }

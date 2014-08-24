@@ -118,7 +118,7 @@ namespace CollegeEnglish
             //[{"UnitID":"u1-p1-d","UnitName":"Unit One","UnitImage":"integrated1\\unitlist\\images_home_1.gif"}
             //1/01
             var unitTitle = (UnitTitle)e.ClickedItem;
-            var courseId = string.Format("{0}/0{1}", unitTitle.UnitImage.Substring(unitTitle.UnitImage.IndexOf("integrated1") + 10, 1),
+            var courseId = string.Format("{0}/0{1}", unitTitle.UnitImage.Substring(unitTitle.UnitImage.IndexOf("integrated") + 10, 1),
                 unitTitle.UnitID.Substring(1, 1));
             if (!Frame.Navigate(typeof(VocabularyPage), courseId))
             {

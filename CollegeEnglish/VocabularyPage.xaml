@@ -17,26 +17,26 @@
                 <Border BorderBrush="#E36FAB" CornerRadius="15" Background="Teal"  BorderThickness="3"  Margin="10">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="3*"></RowDefinition>
                         </Grid.RowDefinitions>
 
                         <Border Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Word}" FontFamily="Segoe UI"  Foreground="#CCFFFFFF" FontSize="{StaticResource PivotHeaderItemFontSize}" />
+                                <TextBlock Text="{Binding Word}" FontFamily="Segoe UI" TextWrapping="Wrap"  Foreground="#CCFFFFFF" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
                                 <Image Source="Assets/Speaker.png" Stretch="None" Tapped="Voice_OnTapped" Tag="{Binding WordVoice}" />
                             </StackPanel>
                             
                         </Border>
 
                         <Border Grid.Row="1" BorderBrush="#FF8800"  BorderThickness="0,3,0,0" Visibility="{Binding WordMeaningVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                            <TextBlock Text="{Binding WordPhrase}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
+                            <TextBlock Text="{Binding WordPhrase}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
                         </Border>
 
                         <Border Grid.Row="2" BorderBrush="SteelBlue" BorderThickness="0,3,0,0" Visibility="{Binding WordMeaningVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                             <StackPanel>
-                                <TextBlock Text="{Binding Sentence}" TextWrapping="WrapWholeWords" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
+                                <TextBlock Text="{Binding Sentence}" TextWrapping="WrapWholeWords" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
                                 <Grid HorizontalAlignment="Left" Margin="5">
                                     <Image Source="Assets/Speaker.png" Stretch="None" Tapped="Voice_OnTapped" Tag="{Binding SentenceVoice}" />
                                 </Grid>
@@ -92,9 +92,13 @@
                               Tapped="NewWords_OnTapped"
                               ItemTemplate="{StaticResource StandardFlipViewItemTemplate}"
                               UseTouchAnimationsForAllNavigation="True">
-                        
+                        <FlipView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </FlipView.ItemsPanel>
                     </FlipView>
-
+                    
                 </PivotItem>
 
 
@@ -114,6 +118,11 @@
                               ItemsSource="{Binding}"
                               ItemTemplate="{StaticResource StandardFlipViewItemTemplate}"
                               UseTouchAnimationsForAllNavigation="True">
+                        <FlipView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </FlipView.ItemsPanel>
                     </FlipView>
                 </PivotItem>
             </Pivot>
