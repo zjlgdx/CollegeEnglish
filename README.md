@@ -3,4 +3,4 @@ CollegeEnglish
 
 New windows phone 8.1 RT project.
 
-meterial source:http://nhjy.hzau.edu.cn/english/perspective/integrated/1/
+Material source:http://nhjy.hzau.edu.cn/english/perspective/integrated/1/
