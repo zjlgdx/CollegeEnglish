@@ -103,6 +103,7 @@
     <Compile Include="Common\StorageDataHelper.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="DataModel\BookListDataSource.cs" />
+    <Compile Include="DataModel\BoolToVisibilityConverter.cs" />
     <Compile Include="DataModel\Course.cs" />
     <Compile Include="DataModel\NewWord.cs" />
     <Compile Include="DataModel\UnitTitleDataSource.cs" />

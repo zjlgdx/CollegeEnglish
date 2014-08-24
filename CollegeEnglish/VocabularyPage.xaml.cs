@@ -155,5 +155,33 @@ namespace CollegeEnglish
 
             }
         }
+
+        //private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        //{
+        //    var image = e.OriginalSource is Image;
+        //    if (image)
+        //    {
+        //        return;
+        //    }
+
+        //    e.
+        //}
+
+        private void NewWords_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var image = e.OriginalSource is Image;
+            if (image)
+            {
+                return;
+            }
+
+            var flipView = sender as FlipView;
+
+            if (flipView != null)
+            {
+                var word = flipView.SelectedItem as NewWord;
+                word.WordMeaningVisible = !word.WordMeaningVisible;
+            }
+        }
     }
 }

@@ -5,10 +5,13 @@
     xmlns:local="using:CollegeEnglish"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dataModel="using:CollegeEnglish.DataModel"
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
+        <dataModel:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        
         <DataTemplate x:Key="StandardFlipViewItemTemplate">
             <Grid>
                 <Border BorderBrush="#E36FAB" CornerRadius="15" Background="Teal"  BorderThickness="3"  Margin="10">
@@ -27,11 +30,11 @@
                             
                         </Border>
 
-                        <Border Grid.Row="1" BorderBrush="#FF8800"  BorderThickness="0,3,0,0">
+                        <Border Grid.Row="1" BorderBrush="#FF8800"  BorderThickness="0,3,0,0" Visibility="{Binding WordMeaningVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                             <TextBlock Text="{Binding WordPhrase}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
                         </Border>
 
-                        <Border Grid.Row="2" BorderBrush="SteelBlue" BorderThickness="0,3,0,0">
+                        <Border Grid.Row="2" BorderBrush="SteelBlue" BorderThickness="0,3,0,0" Visibility="{Binding WordMeaningVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                             <StackPanel>
                                 <TextBlock Text="{Binding Sentence}" TextWrapping="WrapWholeWords" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
                                 <Grid HorizontalAlignment="Left" Margin="5">
@@ -86,7 +89,9 @@
                               BorderBrush="Black" 
                               BorderThickness="1"
                               ItemsSource="{Binding}"
-                              ItemTemplate="{StaticResource StandardFlipViewItemTemplate}">
+                              Tapped="NewWords_OnTapped"
+                              ItemTemplate="{StaticResource StandardFlipViewItemTemplate}"
+                              UseTouchAnimationsForAllNavigation="True">
                         
                     </FlipView>
 
@@ -103,16 +108,14 @@
                 >
                     <!--Double line list no text wrapping-->
                     <FlipView x:Name="NewWordsB" 
-                     
+                              Tapped="NewWords_OnTapped"
                               BorderBrush="Black" 
                               BorderThickness="1"
                               ItemsSource="{Binding}"
-                              ItemTemplate="{StaticResource StandardFlipViewItemTemplate}">
-                        
+                              ItemTemplate="{StaticResource StandardFlipViewItemTemplate}"
+                              UseTouchAnimationsForAllNavigation="True">
                     </FlipView>
                 </PivotItem>
-
-
             </Pivot>
         </Grid>
     </Grid>
