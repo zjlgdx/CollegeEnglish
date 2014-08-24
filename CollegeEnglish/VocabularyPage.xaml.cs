@@ -1,4 +1,5 @@
-﻿using Windows.Media.Playback;
+﻿using System.Reflection;
+using Windows.Media.Playback;
 using Windows.UI.Popups;
 using CollegeEnglish.Common;
 using System;
@@ -156,32 +157,21 @@ namespace CollegeEnglish
             }
         }
 
-        //private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
-        //{
-        //    var image = e.OriginalSource is Image;
-        //    if (image)
-        //    {
-        //        return;
-        //    }
-
-        //    e.
-        //}
-
-        private void NewWords_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void ViewAppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            var image = e.OriginalSource is Image;
-            if (image)
-            {
-                return;
-            }
-
-            var flipView = sender as FlipView;
-
+            PivotItem pivotItem = (PivotItem)pivot.SelectedItem;
+            var flipView = pivotItem.Content as FlipView;
             if (flipView != null)
             {
                 var word = flipView.SelectedItem as NewWord;
                 word.WordMeaningVisible = !word.WordMeaningVisible;
+
+                ViewAppBarButton.Label = word.WordMeaningVisible ? "隐藏释义" : "显示释义";
             }
         }
+
+        
     }
+
+
 }
