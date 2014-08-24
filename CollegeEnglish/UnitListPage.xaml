@@ -43,9 +43,11 @@
             Margin="19,0,0,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="0,9.5,0,15" Height="60"  >
-                            <Image Source="{Binding UnitImage}" Stretch="UniformToFill" AutomationProperties.Name="{Binding UnitName}"/>
+                        
+                        <Border Background="LightSkyBlue"  Margin="0,9.5,0,15" Height="60">
+                            <Image Source="{Binding UnitImage}" Stretch="None" AutomationProperties.Name="{Binding UnitName}"/>
                         </Border>
+                        
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

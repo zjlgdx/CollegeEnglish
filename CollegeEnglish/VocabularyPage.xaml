@@ -14,13 +14,17 @@
                 <Border BorderBrush="#E36FAB" CornerRadius="15" Background="Teal"  BorderThickness="3"  Margin="10">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="3*"></RowDefinition>
                         </Grid.RowDefinitions>
 
                         <Border Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Word}" FontFamily="Segoe UI"  Foreground="#CCFFFFFF" FontSize="{StaticResource PivotHeaderItemFontSize}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Word}" FontFamily="Segoe UI"  Foreground="#CCFFFFFF" FontSize="{StaticResource PivotHeaderItemFontSize}" />
+                                <Image Source="Assets/Speaker.png" Stretch="None" Tapped="Voice_OnTapped" Tag="{Binding WordVoice}" />
+                            </StackPanel>
+                            
                         </Border>
 
                         <Border Grid.Row="1" BorderBrush="#FF8800"  BorderThickness="0,3,0,0">
@@ -28,10 +32,22 @@
                         </Border>
 
                         <Border Grid.Row="2" BorderBrush="SteelBlue" BorderThickness="0,3,0,0">
-                            <TextBlock Text="{Binding Sentence}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
+                            <StackPanel>
+                                <TextBlock Text="{Binding Sentence}" TextWrapping="WrapWholeWords" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
+                                <Grid HorizontalAlignment="Left" Margin="5">
+                                    <Image Source="Assets/Speaker.png" Stretch="None" Tapped="Voice_OnTapped" Tag="{Binding SentenceVoice}" />
+                                </Grid>
+                                
+                            </StackPanel>
                         </Border>
                     </Grid>
                 </Border>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PivotItemHeaderTemplate">
+            <Grid>
+                <TextBlock Text="{Binding}" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
             </Grid>
         </DataTemplate>
 
@@ -56,7 +72,7 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,9.5,10,0">
-            <Pivot x:Uid="Pivot" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True">
+            <Pivot x:Uid="Pivot" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" HeaderTemplate="{StaticResource PivotItemHeaderTemplate}">
                 <!--Pivot item one-->
                 <PivotItem
                 x:Uid="PivotItem1"

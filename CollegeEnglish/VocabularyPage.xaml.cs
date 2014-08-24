@@ -1,4 +1,6 @@
-﻿using CollegeEnglish.Common;
+﻿using Windows.Media.Playback;
+using Windows.UI.Popups;
+using CollegeEnglish.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -118,5 +120,40 @@ namespace CollegeEnglish
         }
 
         #endregion
+
+        private async void Voice_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var target = (Image)sender;
+            var voice = target.Tag as string;
+
+            if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
+            {
+                BackgroundMediaPlayer.Current.Pause();
+            }
+            else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState || MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
+            {
+                var file = voice;
+
+                if (!string.IsNullOrEmpty(file))
+                {
+                    string[] fileInfo = new[] { "vocabulary", file };
+                    var message = new ValueSet
+                    {
+                        {
+                            "Play",
+                            fileInfo
+                        }
+
+                    };
+                    BackgroundMediaPlayer.SendMessageToBackground(message);
+                }
+                else
+                {
+                    MessageDialog md2 = new MessageDialog("No file to play!", "audio");
+                    await md2.ShowAsync();
+                }
+
+            }
+        }
     }
 }
