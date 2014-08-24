@@ -107,6 +107,41 @@ namespace CollegeEnglish.Common
 
         }
 
+        public static async Task<string> GetCourse(string courseId)
+        {
+            var basefoler = await GetBaseFolder();
+            if (basefoler == null)
+            {
+                return null;
+            }
+
+            var bookId = courseId.Substring(0, 1);
+
+            StorageFolder subfolder = await basefoler.GetFolderAsync("integrated" + bookId);
+            StorageFolder subsubfolder = await subfolder.GetFolderAsync(GetUnitFolder(courseId));
+
+            StorageFile file = await subsubfolder.GetFileAsync(GetUnitJsonFileFolder(courseId));
+
+            string result = await FileIO.ReadTextAsync(file);
+            return result;
+        }
+
+        private static string GetUnitFolder(string courseId)
+        {
+            var index = courseId.IndexOf("/");
+            var unitIndex = courseId.Substring(index + 1, 2);
+            return "Unit" + unitIndex;
+        }
+
+        private static string GetUnitJsonFileFolder(string courseId)
+        {
+            if (courseId.Contains("p3newword1"))
+            {
+                return "TextB.json";
+            }
+
+            return "TextA.json";
+        }
 
         //E:\collegeEnglish\integrated1\unitlist
         public static async Task<string> GetUnitlist(string bookId)

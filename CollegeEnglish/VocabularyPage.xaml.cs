@@ -24,12 +24,12 @@ namespace CollegeEnglish
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class UnitListPage : Page
+    public sealed partial class VocabularyPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public UnitListPage()
+        public VocabularyPage()
         {
             this.InitializeComponent();
 
@@ -68,9 +68,15 @@ namespace CollegeEnglish
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            string bookId = (string)e.NavigationParameter;
-            var bookUnits = await UnitTitleDataSource.GetUnitTitlesAsync(bookId:bookId);
-            this.DefaultViewModel["UnitTitles"] = bookUnits;
+            // 1/01
+            // courseId:"1/01p3newword1.htm"
+            string courseId = (string)e.NavigationParameter;
+            var newWordsAcourseId = courseId + "p2newword1.htm";
+            var courseA = await VocabularyDataSource.GetCourseAsync(courseId: newWordsAcourseId);
+            var newWordsBcourseId = courseId + "p3newword1.htm";
+            var courseB = await VocabularyDataSource.GetCourseAsync(courseId: newWordsBcourseId);
+            this.DefaultViewModel["NewWordsA"] = courseA.NewWords;
+            this.DefaultViewModel["NewWordsB"] = courseB.NewWords;
         }
 
         /// <summary>
@@ -111,18 +117,5 @@ namespace CollegeEnglish
         }
 
         #endregion
-
-        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            //[{"UnitID":"u1-p1-d","UnitName":"Unit One","UnitImage":"integrated1\\unitlist\\images_home_1.gif"}
-            //1/01
-            var unitTitle = (UnitTitle)e.ClickedItem;
-            var courseId = string.Format("{0}/0{1}", unitTitle.UnitImage.Substring(unitTitle.UnitImage.IndexOf("integrated1") + 10, 1),
-                unitTitle.UnitID.Substring(1, 1));
-            if (!Frame.Navigate(typeof(VocabularyPage), courseId))
-            {
-                throw new Exception("Navigation failed.");
-            }
-        }
     }
 }
