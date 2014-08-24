@@ -71,6 +71,7 @@ namespace CollegeEnglish
             string bookId = (string)e.NavigationParameter;
             var bookUnits = await UnitTitleDataSource.GetUnitTitlesAsync(bookId:bookId);
             this.DefaultViewModel["UnitTitles"] = bookUnits;
+            this.DefaultViewModel["BookId"] = "Book "+ bookId;
         }
 
         /// <summary>

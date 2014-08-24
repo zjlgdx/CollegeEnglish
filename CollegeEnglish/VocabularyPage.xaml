@@ -8,7 +8,34 @@
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <DataTemplate x:Key="StandardFlipViewItemTemplate">
+            <Grid>
+                <Border BorderBrush="#E36FAB" CornerRadius="15" Background="Teal"  BorderThickness="3"  Margin="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="2*"></RowDefinition>
+                        </Grid.RowDefinitions>
 
+                        <Border Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Word}" FontFamily="Segoe UI"  Foreground="#CCFFFFFF" FontSize="{StaticResource PivotHeaderItemFontSize}" />
+                        </Border>
+
+                        <Border Grid.Row="1" BorderBrush="#FF8800"  BorderThickness="0,3,0,0">
+                            <TextBlock Text="{Binding WordPhrase}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
+                        </Border>
+
+                        <Border Grid.Row="2" BorderBrush="SteelBlue" BorderThickness="0,3,0,0">
+                            <TextBlock Text="{Binding Sentence}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
     <Grid x:Name="LayoutRoot">
 
         <Grid.ChildrenTransitions>
@@ -24,7 +51,7 @@
 
         <!-- Title Panel -->
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="College English" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock Text="{Binding CourseName}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
         </StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
@@ -42,34 +69,9 @@
                     <FlipView x:Name="NewWordsA" 
                               BorderBrush="Black" 
                               BorderThickness="1"
-                              ItemsSource="{Binding}">
-                        <FlipView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Border BorderBrush="#E36FAB" CornerRadius="15" Background="Teal"  BorderThickness="3"  Margin="10">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"></RowDefinition>
-                                                <RowDefinition Height="Auto"></RowDefinition>
-                                                <RowDefinition Height="2*"></RowDefinition>
-                                            </Grid.RowDefinitions>
-
-                                            <Border Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Word}" FontFamily="Segoe UI"  Foreground="#CCFFFFFF" FontSize="{StaticResource PivotHeaderItemFontSize}" />
-                                            </Border>
-
-                                            <Border Grid.Row="1" BorderBrush="#FF8800"  BorderThickness="0,3,0,0">
-                                                <TextBlock Text="{Binding WordPhrase}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
-                                            </Border>
-
-                                            <Border Grid.Row="2" BorderBrush="SteelBlue" BorderThickness="0,3,0,0">
-                                                <TextBlock Text="{Binding Sentence}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
-                                            </Border>
-                                        </Grid>
-                                    </Border>
-                                </Grid>
-                            </DataTemplate>
-                        </FlipView.ItemTemplate>
+                              ItemsSource="{Binding}"
+                              ItemTemplate="{StaticResource StandardFlipViewItemTemplate}">
+                        
                     </FlipView>
 
                 </PivotItem>
@@ -88,34 +90,9 @@
                      
                               BorderBrush="Black" 
                               BorderThickness="1"
-                              ItemsSource="{Binding}">
-                        <FlipView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Border BorderBrush="#E36FAB" CornerRadius="15" Background="Teal"  BorderThickness="3"  Margin="10">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"></RowDefinition>
-                                                <RowDefinition Height="Auto"></RowDefinition>
-                                                <RowDefinition Height="2*"></RowDefinition>
-                                            </Grid.RowDefinitions>
-
-                                            <Border Grid.Row="0" BorderBrush="#FF8800"  BorderThickness="0,0,0,3">
-                                                <TextBlock Text="{Binding Word}" FontFamily="Segoe UI"  Foreground="#CCFFFFFF" FontSize="{StaticResource PivotHeaderItemFontSize}" />
-                                            </Border>
-
-                                            <Border Grid.Row="1" BorderBrush="SteelBlue" BorderThickness="0,0,0,3">
-                                                <TextBlock Text="{Binding WordPhrase}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
-                                            </Border>
-
-                                            <Border Grid.Row="2">
-                                                <TextBlock Text="{Binding Sentence}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="{StaticResource TextStyleExtraLargePlusFontSize}" />
-                                            </Border>
-                                        </Grid>
-                                    </Border>
-                                </Grid>
-                            </DataTemplate>
-                        </FlipView.ItemTemplate>
+                              ItemsSource="{Binding}"
+                              ItemTemplate="{StaticResource StandardFlipViewItemTemplate}">
+                        
                     </FlipView>
                 </PivotItem>
 

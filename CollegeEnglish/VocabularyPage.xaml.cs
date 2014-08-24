@@ -77,6 +77,7 @@ namespace CollegeEnglish
             var courseB = await VocabularyDataSource.GetCourseAsync(courseId: newWordsBcourseId);
             this.DefaultViewModel["NewWordsA"] = courseA.NewWords;
             this.DefaultViewModel["NewWordsB"] = courseB.NewWords;
+            this.DefaultViewModel["CourseName"] = courseA.CourseName;
         }
 
         /// <summary>
