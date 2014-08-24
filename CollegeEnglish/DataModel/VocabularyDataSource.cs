@@ -15,6 +15,8 @@ namespace CollegeEnglish.DataModel
 
         public Course Course { get; private set; }
 
+        private string courseId;
+
         public static async Task<Course> GetCourseAsync(string courseId)
         {
             await _vocabularyDataSource.GetDataAsync(courseId);
@@ -22,8 +24,19 @@ namespace CollegeEnglish.DataModel
             return _vocabularyDataSource.Course;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="courseId">"1/01p2newword1.htm"</param>
+        /// <returns></returns>
         private async Task GetDataAsync(string courseId)
         {
+            if (this.courseId == courseId)
+            {
+                return;
+            }
+            this.courseId = courseId;
+
             string jsonText = await StorageDataHelper.GetCourse(courseId);
             JsonObject jsonObject = JsonObject.Parse(jsonText);
             JsonArray jsonArray = jsonObject["NewWords"].GetArray();

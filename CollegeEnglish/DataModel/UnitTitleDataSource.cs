@@ -35,6 +35,8 @@ namespace CollegeEnglish.DataModel
             get { return this._unitTitles; }
         }
 
+        private string bookId;
+
         public static async Task<IEnumerable<UnitTitle>> GetUnitTitlesAsync(string bookId)
         {
             await _unitTitleDataSource.GetDataAsync(bookId);
@@ -44,6 +46,12 @@ namespace CollegeEnglish.DataModel
 
         private async Task GetDataAsync(string bookId)
         {
+            if (this.bookId == bookId)
+            {
+                return;
+            }
+            this.bookId = bookId;
+
             this._unitTitles.Clear();
             string jsonText = await StorageDataHelper.GetUnitlist(bookId: bookId);
             JsonArray jsonArray = JsonArray.Parse(jsonText);
