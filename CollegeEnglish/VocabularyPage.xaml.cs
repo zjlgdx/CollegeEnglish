@@ -1,27 +1,15 @@
-﻿using System.Reflection;
-using System.Threading.Tasks;
-using Windows.Media.Playback;
-using Windows.UI.Popups;
-using CollegeEnglish.Common;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
+﻿using CollegeEnglish.Common;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 using CollegeEnglish.DataModel;
+using System;
+using System.Threading.Tasks;
+using Windows.Foundation.Collections;
+using Windows.Media.Playback;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace CollegeEnglish
 {
@@ -30,6 +18,7 @@ namespace CollegeEnglish
     /// </summary>
     public sealed partial class VocabularyPage : Page
     {
+        private MediaPlayer _mediaPlayer;
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -72,8 +61,7 @@ namespace CollegeEnglish
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // 1/01
-            // courseId:"1/01p3newword1.htm"
+            // courseId:"1/01"
             string courseId = (string)e.NavigationParameter;
             var newWordsAcourseId = courseId + "p2newword1.htm";
             var courseA = await VocabularyDataSource.GetCourseAsync(courseId: newWordsAcourseId);
@@ -113,6 +101,8 @@ namespace CollegeEnglish
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // initialize the backgroundmediaplayer intanse on purpose.
+            _mediaPlayer = BackgroundMediaPlayer.Current;
             this.navigationHelper.OnNavigatedTo(e);
         }
 

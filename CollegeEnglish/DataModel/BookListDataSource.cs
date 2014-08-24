@@ -50,15 +50,6 @@ namespace CollegeEnglish.DataModel
             return _bookListDataSource.Books;
         }
 
-        public static async Task<Book> GetBookAsync(string uniqueId)
-        {
-            await _bookListDataSource.GetDataAsync();
-            // Simple linear search is acceptable for small data sets
-            var matches = _bookListDataSource.Books.Where((book) => book.UniqueId.Equals(uniqueId));
-            if (matches.Count() == 1) return matches.First();
-            return null;
-        }
-
         private async Task GetDataAsync()
         {
             if (this._books.Count != 0)
@@ -74,9 +65,7 @@ namespace CollegeEnglish.DataModel
             foreach (JsonValue bookValue in jsonArray)
             {
                 JsonObject bookObject = bookValue.GetObject();
-                Book book = new Book(bookObject["UniqueId"].GetString(),
-                                                            bookObject["Title"].GetString(), "Assets/bookCover.png");
-
+                Book book = new Book(bookObject["UniqueId"].GetString(), bookObject["Title"].GetString(), "Assets/bookCover.png");
                 
                 this.Books.Add(book);
             }

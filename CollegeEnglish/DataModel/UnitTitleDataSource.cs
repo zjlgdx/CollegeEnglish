@@ -1,12 +1,8 @@
-﻿using System;
+﻿using CollegeEnglish.Common;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Json;
-using Windows.Storage;
-using CollegeEnglish.Common;
 
 namespace CollegeEnglish.DataModel
 {
@@ -46,32 +42,18 @@ namespace CollegeEnglish.DataModel
             return _unitTitleDataSource.UnitTitles;
         }
 
-        public static async Task<UnitTitle> GetUnitTitleAsync(string bookId, string unitID)
-        {
-            await _unitTitleDataSource.GetDataAsync(bookId);
-            // Simple linear search is acceptable for small data sets
-            var matches = _unitTitleDataSource.UnitTitles.Where((unitTitle) => unitTitle.UnitID.Equals(unitID));
-            if (matches.Count() == 1) return matches.First();
-            return null;
-        }
-
         private async Task GetDataAsync(string bookId)
         {
-            if (this._unitTitles.Count != 0)
-                return;
-
-            //Uri dataUri = new Uri("ms-appx:///DataModel/BookListData.json");
-
-            //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
+            this._unitTitles.Clear();
             string jsonText = await StorageDataHelper.GetUnitlist(bookId: bookId);
             JsonArray jsonArray = JsonArray.Parse(jsonText);
-            //JsonArray jsonArray = jsonObject.GetArray();
 
             foreach (JsonValue bookValue in jsonArray)
             {
                 JsonObject unitObject = bookValue.GetObject();
                 UnitTitle unitTitle = new UnitTitle(unitObject["UnitID"].ToJsonString(),
-                                                            unitObject["UnitName"].ToJsonString(), unitObject["UnitImage"].ToJsonString("D:\\WP.CE\\"));
+                                                    unitObject["UnitName"].ToJsonString(), 
+                                                    unitObject["UnitImage"].ToJsonString("D:\\WP.CE\\"));
 
                 this.UnitTitles.Add(unitTitle);
             }

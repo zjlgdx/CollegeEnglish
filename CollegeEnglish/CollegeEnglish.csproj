@@ -105,6 +105,7 @@
     <Compile Include="DataModel\BookListDataSource.cs" />
     <Compile Include="DataModel\BoolToVisibilityConverter.cs" />
     <Compile Include="DataModel\Course.cs" />
+    <Compile Include="DataModel\JsonStringExtension.cs" />
     <Compile Include="DataModel\NewWord.cs" />
     <Compile Include="DataModel\UnitTitleDataSource.cs" />
     <Compile Include="DataModel\VocabularyDataSource.cs" />

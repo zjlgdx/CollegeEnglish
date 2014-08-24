@@ -24,9 +24,6 @@ namespace CollegeEnglish.DataModel
 
         private async Task GetDataAsync(string courseId)
         {
-            //Uri dataUri = new Uri("ms-appx:///DataModel/BookListData.json");
-
-            //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
             string jsonText = await StorageDataHelper.GetCourse(courseId);
             JsonObject jsonObject = JsonObject.Parse(jsonText);
             JsonArray jsonArray = jsonObject["NewWords"].GetArray();
@@ -36,27 +33,15 @@ namespace CollegeEnglish.DataModel
             foreach (JsonValue wordValue in jsonArray)
             {
                 JsonObject unitObject = wordValue.GetObject();
-                NewWord newWord = new NewWord(unitObject["WordId"].ToJsonString(), unitObject["Word"].ToJsonString(),
-                     unitObject["WordVoice"].ToJsonString("D:\\WP.CE\\"),
-                     unitObject["WordPhrase"].ToJsonString(),
-                     unitObject["Sentence"].ToJsonString(),
-                     unitObject["SentenceVoice"].ToJsonString("D:\\WP.CE\\"));
+                NewWord newWord = new NewWord(unitObject["WordId"].ToJsonString(),
+                                              unitObject["Word"].ToJsonString(),
+                                              unitObject["WordVoice"].ToJsonString("D:\\WP.CE\\"),
+                                              unitObject["WordPhrase"].ToJsonString(),
+                                              unitObject["Sentence"].ToJsonString(),
+                                              unitObject["SentenceVoice"].ToJsonString("D:\\WP.CE\\"));
 
                 this.Course.NewWords.Add(newWord);
             }
-        }
-    }
-
-    public static class JsonStringExtension
-    {
-        public static string ToJsonString(this IJsonValue obj, string preString = "")
-        {
-            if (obj == null || obj.ValueType == JsonValueType.Null)
-            {
-                return string.Empty;
-            }
-
-            return preString + obj.GetString();
         }
     }
 }
