@@ -1,0 +1,3 @@
+MainPackage=C:\Users\Yibang\Downloads\CollegeEnglish-master\CollegeEnglish-master\CollegeEnglish\bin\Release\CollegeEnglish_1.1.0.1_Bundle\CollegeEnglish_1.1.0.1_AnyCPU.appx
+SymbolPackage=C:\Users\Yibang\Downloads\CollegeEnglish-master\CollegeEnglish-master\CollegeEnglish\AppPackages\CollegeEnglish_1.1.0.1_Test\CollegeEnglish_1.1.0.1_AnyCPU.appxsym
+ResourcePack=C:\Users\Yibang\Downloads\CollegeEnglish-master\CollegeEnglish-master\CollegeEnglish\bin\Release\CollegeEnglish_1.1.0.1_Bundle\CollegeEnglish_1.1.0.1_scale-100.appx
