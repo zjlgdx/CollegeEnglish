@@ -48,6 +48,9 @@ namespace CollegeEnglish
             get { return this.defaultViewModel; }
         }
 
+        public string CouseId { get; set; }
+        public string CurrentCouse { get; set; }
+
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -63,13 +66,17 @@ namespace CollegeEnglish
         {
             // courseId:"1/01"
             string courseId = (string)e.NavigationParameter;
+            CouseId = courseId;
             var newWordsAcourseId = courseId + "p2newword1.htm";
+            CurrentCouse = newWordsAcourseId;
             var courseA = await VocabularyDataSource.GetCourseAsync(courseId: newWordsAcourseId);
-            var newWordsBcourseId = courseId + "p3newword1.htm";
-            var courseB = await VocabularyDataSource.GetCourseAsync(courseId: newWordsBcourseId);
+            //var newWordsBcourseId = courseId + "p3newword1.htm";
+            //var courseB = await VocabularyDataSource.GetCourseAsync(courseId: newWordsBcourseId);
             this.DefaultViewModel["NewWordsA"] = courseA.NewWords;
-            this.DefaultViewModel["NewWordsB"] = courseB.NewWords;
+            //this.DefaultViewModel["NewWordsB"] = courseB.NewWords;
             this.DefaultViewModel["CourseName"] = courseA.CourseName;
+            this.DefaultViewModel["LessonName"] = "词汇A";
+            //pivot.Items[0].
         }
 
         /// <summary>
@@ -173,6 +180,28 @@ namespace CollegeEnglish
                     await md2.ShowAsync();
                 }
             }
+        }
+
+        private async void SwitchLesson_Click(object sender, RoutedEventArgs e)
+        {
+            var newWordsBcourseId = CouseId + "p3newword1.htm";
+            var newWordsAcourseId = CouseId + "p2newword1.htm";
+
+            if (CurrentCouse == newWordsAcourseId)
+            {
+                CurrentCouse = newWordsBcourseId;
+                //SwitchLesson.Label = "词汇B";
+                this.DefaultViewModel["LessonName"] = "词汇B";
+            }
+            else
+            {
+                CurrentCouse = newWordsAcourseId;
+                //SwitchLesson.Label = "词汇A";
+                this.DefaultViewModel["LessonName"] = "词汇A";
+            }
+
+            var courseB = await VocabularyDataSource.GetCourseAsync(courseId: CurrentCouse);
+            this.DefaultViewModel["NewWordsA"] = courseB.NewWords;
         }
     }
 

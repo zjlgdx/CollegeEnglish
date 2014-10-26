@@ -46,7 +46,7 @@
 
         <DataTemplate x:Key="PivotItemHeaderTemplate">
             <Grid>
-                <TextBlock Text="{Binding}" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
+                <TextBlock Text="{Binding LessonName}" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
             </Grid>
         </DataTemplate>
 
@@ -76,7 +76,6 @@
                 <PivotItem
                 x:Uid="PivotItem1"
                 Margin="5,14.5,5,0"
-                Header="词汇A"
                 DataContext="{Binding NewWordsA}"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
                     <!--Double line list with text wrapping-->
@@ -87,37 +86,8 @@
                               ItemsSource="{Binding}"
                               ItemTemplate="{StaticResource StandardFlipViewItemTemplate}"
                               UseTouchAnimationsForAllNavigation="True">
-                        <FlipView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </FlipView.ItemsPanel>
                     </FlipView>
 
-                </PivotItem>
-
-
-
-                <!--Pivot item three-->
-                <PivotItem
-                x:Uid="PivotItem3"
-                Margin="5,14.5,5,0"
-                Header="词汇B"
-                DataContext="{Binding NewWordsB}"
-                >
-                    <!--Double line list no text wrapping-->
-                    <FlipView x:Name="NewWordsB" 
-                              BorderBrush="Black" 
-                              BorderThickness="1"
-                              ItemsSource="{Binding}"
-                              ItemTemplate="{StaticResource StandardFlipViewItemTemplate}"
-                              UseTouchAnimationsForAllNavigation="True">
-                        <FlipView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </FlipView.ItemsPanel>
-                    </FlipView>
                 </PivotItem>
             </Pivot>
         </Grid>
@@ -127,6 +97,9 @@
         <CommandBar>
             <AppBarButton x:Uid="PlayAppBarButton" x:Name="PlayAppBarButton" Label="单词读音" Icon="Audio"  Click="PlayAppBarButton_OnClick" />
             <AppBarButton x:Uid="ViewAppBarButton" x:Name="ViewAppBarButton" Label="显示释义" Icon="View" Click="ViewAppBarButton_Click" />
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="SwitchLesson" x:Name="SwitchLesson" Label="{Binding LessonName}" Icon="Switch" Click="SwitchLesson_Click"  />
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
