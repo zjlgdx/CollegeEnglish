@@ -76,11 +76,11 @@
                 <PivotItem
                 x:Uid="PivotItem1"
                 Margin="5,14.5,5,0"
-                DataContext="{Binding NewWordsA}"
+                DataContext="{Binding NewWords}"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
                     <!--Double line list with text wrapping-->
 
-                    <FlipView x:Name="NewWordsA" 
+                    <FlipView x:Name="NewWords" 
                               BorderBrush="Black" 
                               BorderThickness="1"
                               ItemsSource="{Binding}"
@@ -98,7 +98,7 @@
             <AppBarButton x:Uid="PlayAppBarButton" x:Name="PlayAppBarButton" Label="单词读音" Icon="Audio"  Click="PlayAppBarButton_OnClick" />
             <AppBarButton x:Uid="ViewAppBarButton" x:Name="ViewAppBarButton" Label="显示释义" Icon="View" Click="ViewAppBarButton_Click" />
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="SwitchLesson" x:Name="SwitchLesson" Label="{Binding LessonName}" Icon="Switch" Click="SwitchLesson_Click"  />
+                <AppBarButton x:Uid="SwitchLesson" x:Name="SwitchLesson" Label="{Binding SwitchingLessonName}" Icon="Switch" Click="SwitchLesson_Click"  />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

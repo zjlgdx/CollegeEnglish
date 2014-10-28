@@ -49,7 +49,7 @@ namespace CollegeEnglish
         }
 
         public string CouseId { get; set; }
-        public string CurrentCouse { get; set; }
+        public string CurrentCouseId { get; set; }
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
@@ -64,19 +64,22 @@ namespace CollegeEnglish
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // courseId:"1/01"
-            string courseId = (string)e.NavigationParameter;
-            CouseId = courseId;
-            var newWordsAcourseId = courseId + "p2newword1.htm";
-            CurrentCouse = newWordsAcourseId;
-            var courseA = await VocabularyDataSource.GetCourseAsync(courseId: newWordsAcourseId);
-            //var newWordsBcourseId = courseId + "p3newword1.htm";
-            //var courseB = await VocabularyDataSource.GetCourseAsync(courseId: newWordsBcourseId);
-            this.DefaultViewModel["NewWordsA"] = courseA.NewWords;
-            //this.DefaultViewModel["NewWordsB"] = courseB.NewWords;
-            this.DefaultViewModel["CourseName"] = courseA.CourseName;
-            this.DefaultViewModel["LessonName"] = "词汇A";
-            //pivot.Items[0].
+            if (!this.DefaultViewModel.ContainsKey("NewWords"))
+            {
+                // courseId:"1/01"
+                string courseId = (string)e.NavigationParameter;
+                CouseId = courseId;
+                var newWordscourseId = courseId + "p2newword1.htm";
+                CurrentCouseId = newWordscourseId;
+                var course = await VocabularyDataSource.GetCourseAsync(courseId: newWordscourseId);
+
+                this.DefaultViewModel["NewWords"] = course.NewWords;
+                this.DefaultViewModel["CourseName"] = course.CourseName;
+
+                this.DefaultViewModel["LessonName"] = "词汇A";
+                this.DefaultViewModel["SwitchingLessonName"] = "词汇B";
+            }
+            
         }
 
         /// <summary>
@@ -187,21 +190,23 @@ namespace CollegeEnglish
             var newWordsBcourseId = CouseId + "p3newword1.htm";
             var newWordsAcourseId = CouseId + "p2newword1.htm";
 
-            if (CurrentCouse == newWordsAcourseId)
+            if (CurrentCouseId == newWordsAcourseId)
             {
-                CurrentCouse = newWordsBcourseId;
+                CurrentCouseId = newWordsBcourseId;
                 //SwitchLesson.Label = "词汇B";
                 this.DefaultViewModel["LessonName"] = "词汇B";
+                this.DefaultViewModel["SwitchingLessonName"] = "词汇A";
             }
             else
             {
-                CurrentCouse = newWordsAcourseId;
+                CurrentCouseId = newWordsAcourseId;
                 //SwitchLesson.Label = "词汇A";
                 this.DefaultViewModel["LessonName"] = "词汇A";
+                this.DefaultViewModel["SwitchingLessonName"] = "词汇B";
             }
 
-            var courseB = await VocabularyDataSource.GetCourseAsync(courseId: CurrentCouse);
-            this.DefaultViewModel["NewWordsA"] = courseB.NewWords;
+            var course = await VocabularyDataSource.GetCourseAsync(courseId: CurrentCouseId);
+            this.DefaultViewModel["NewWords"] = course.NewWords;
         }
     }
 
