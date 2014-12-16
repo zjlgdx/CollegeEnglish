@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
-  <Publisher>CN=29850D25-E9B1-4A2A-A45B-151CCC7F9B72</Publisher>
-  <PublisherDisplayName>Yvan</PublisherDisplayName>
+  <Publisher>CN=4BE00AF2-1094-41E9-BDE4-AF3F522A812E</Publisher>
+  <PublisherDisplayName>Yvan Yang</PublisherDisplayName>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
   <SupportedLocales>
     <Language Code="af" InMinimumRequirementSet="true" />
@@ -184,13 +184,11 @@
     <Language Code="vi-vn" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>5945Yvan.CollegeEnglishVocabulary</MainPackageIdentityName>
+    <MainPackageIdentityName>37940YvanYang.59906C7B13B35</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>College English Vocabulary</ReservedName>
+      <ReservedName>大学综合英语词汇</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
-  <AccountPackageIdentityNames>
-    <MainPackageIdentityName>5945Yvan.58010D0D9BC78</MainPackageIdentityName>
-  </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=23c80369-ba4a-4dfe-a99e-903012fbf0ac" />
+  <AccountPackageIdentityNames />
+  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=57697c6e-27d8-4766-a348-b7033e53a73d" />
 </StoreAssociation>

@@ -11,12 +11,15 @@ namespace CollegeEnglish.DataModel
                 return string.Empty;
             }
 
+            var path = string.Empty;
             if (!string.IsNullOrEmpty(prefix))
             {
-                return prefix + obj.GetString();
+                path = prefix + obj.GetString();
+                path = path.Replace("\\", "/");
+                return path;
             }
-
-            return obj.GetString();
+            path = obj.GetString().Replace("\\", "/");
+            return path;
         }
     }
 }

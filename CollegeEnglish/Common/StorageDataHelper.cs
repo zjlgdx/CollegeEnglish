@@ -83,9 +83,6 @@ namespace CollegeEnglish.Common
             StorageFolder subfolder = await notesFolder.CreateFolderAsync("Json", CreationCollisionOption.OpenIfExists);
             StorageFile file = await subfolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(file, logData);
-
-
-
         }
 
         public async static Task<string> readTextFromSDCard(string foldername, string filename)
@@ -109,20 +106,14 @@ namespace CollegeEnglish.Common
 
         public static async Task<string> GetCourse(string courseId)
         {
-            var basefoler = await GetBaseFolder();
-            if (basefoler == null)
-            {
-                return null;
-            }
-
             var bookId = courseId.Substring(0, 1);
 
-            StorageFolder subfolder = await basefoler.GetFolderAsync("integrated" + bookId);
-            StorageFolder subsubfolder = await subfolder.GetFolderAsync(GetUnitFolder(courseId));
+            var subfolder = Constants.DATA_BASE_PATH + ("integrated" + bookId);
+            var subsubfolder = subfolder + "/" + (GetUnitFolder(courseId));
 
-            StorageFile file = await subsubfolder.GetFileAsync(GetUnitJsonFileFolder(courseId));
-
-            string result = await FileIO.ReadTextAsync(file);
+            var file = subsubfolder + "/" + (GetUnitJsonFileFolder(courseId));
+            StorageFile sourceFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(file.Replace("\\", "/")));
+            string result = await FileIO.ReadTextAsync(sourceFile);
             return result;
         }
 
@@ -146,37 +137,12 @@ namespace CollegeEnglish.Common
         //E:\collegeEnglish\integrated1\unitlist
         public static async Task<string> GetUnitlist(string bookId)
         {
-            var basefoler = await GetBaseFolder();
-            if (basefoler == null)
-            {
-                return null;
-            }
+            var basefoler = Constants.DATA_BASE_PATH;
+            var file = basefoler + ("integrated" + bookId + "/unitlist/UnitList.json");
 
-            StorageFolder subfolder = await basefoler.GetFolderAsync("integrated"+bookId);
-            StorageFolder subsubfolder = await subfolder.GetFolderAsync("unitlist");
-
-            StorageFile file = await subsubfolder.GetFileAsync("UnitList.json");
-
-            string result = await FileIO.ReadTextAsync(file);
+            StorageFile sourceFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(file.Replace("\\", "/")));
+            string result = await FileIO.ReadTextAsync(sourceFile);
             return result;
         }
-
-
-        // WP.CE
-        public static async Task<StorageFolder> GetBaseFolder()
-        {
-            var devices = Windows.Storage.KnownFolders.RemovableDevices;
-
-            var sdCards = await devices.GetFoldersAsync();
-
-            if (sdCards.Count == 0) return null;
-
-            var firstCard = sdCards[0];
-            StorageFolder notesFolder = await firstCard.CreateFolderAsync(RootFolder, CreationCollisionOption.OpenIfExists);
-            return notesFolder;
-        }
-
-
-
     }
 }

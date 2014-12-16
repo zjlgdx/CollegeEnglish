@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="5945Yvan.CollegeEnglishVocabulary" Publisher="CN=29850D25-E9B1-4A2A-A45B-151CCC7F9B72" Version="1.1.0.4" />
-  <mp:PhoneIdentity PhoneProductId="df95e171-2102-4ab4-9306-91d0afdd84d5" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="37940YvanYang.59906C7B13B35" Publisher="CN=4BE00AF2-1094-41E9-BDE4-AF3F522A812E" Version="1.1.0.1" />
+  <mp:PhoneIdentity PhoneProductId="59d4e86a-75c4-4492-b87f-8b44bdc10f36" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>College English Vocabulary</DisplayName>
-    <PublisherDisplayName>Yvan</PublisherDisplayName>
+    <DisplayName>大学综合英语词汇</DisplayName>
+    <PublisherDisplayName>Yvan Yang</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>

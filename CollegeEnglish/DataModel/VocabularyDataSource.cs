@@ -48,10 +48,10 @@ namespace CollegeEnglish.DataModel
                 JsonObject unitObject = wordValue.GetObject();
                 NewWord newWord = new NewWord(unitObject["WordId"].ToJsonString(),
                                               unitObject["Word"].ToJsonString(),
-                                              unitObject["WordVoice"].ToJsonString("D:\\WP.CE\\"),
+                                              unitObject["WordVoice"].ToJsonString(Constants.DATA_BASE_PATH),
                                               unitObject["WordPhrase"].ToJsonString(),
                                               unitObject["Sentence"].ToJsonString(),
-                                              unitObject["SentenceVoice"].ToJsonString("D:\\WP.CE\\"));
+                                              unitObject["SentenceVoice"].ToJsonString(Constants.DATA_BASE_PATH));
 
                 this.Course.NewWords.Add(newWord);
             }

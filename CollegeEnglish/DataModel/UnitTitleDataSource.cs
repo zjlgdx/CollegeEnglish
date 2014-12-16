@@ -61,7 +61,7 @@ namespace CollegeEnglish.DataModel
                 JsonObject unitObject = bookValue.GetObject();
                 UnitTitle unitTitle = new UnitTitle(unitObject["UnitID"].ToJsonString(),
                                                     unitObject["UnitName"].ToJsonString(), 
-                                                    unitObject["UnitImage"].ToJsonString("D:\\WP.CE\\"));
+                                                    unitObject["UnitImage"].ToJsonString(Constants.DATA_BASE_PATH));
 
                 this.UnitTitles.Add(unitTitle);
             }
