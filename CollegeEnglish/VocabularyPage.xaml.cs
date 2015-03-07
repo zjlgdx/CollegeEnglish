@@ -73,13 +73,22 @@ namespace CollegeEnglish
                 CurrentCouseId = newWordscourseId;
                 var course = await VocabularyDataSource.GetCourseAsync(courseId: newWordscourseId);
 
-                this.DefaultViewModel["NewWords"] = course.NewWords;
-                this.DefaultViewModel["CourseName"] = course.CourseName;
+                this.DefaultViewModel["NewWords"] = course.Vocabularies;
+                this.DefaultViewModel["CourseName"] = getUnitTitle(course.UnitTitle);
 
                 this.DefaultViewModel["LessonName"] = "词汇A";
                 this.DefaultViewModel["SwitchingLessonName"] = "词汇B";
             }
             
+        }
+
+        private string getUnitTitle(string unitTitle)
+        {
+            //__horizonread1_01p2newword1_htm
+            var arrs = unitTitle.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            var bookId = arrs[0].Replace("horizonread", "");
+            var unitId = arrs[1].Substring(1, 1);
+            return "第" + bookId + "册 第" + unitId + "单元";
         }
 
         /// <summary>
@@ -137,7 +146,7 @@ namespace CollegeEnglish
             var flipView = pivotItem.Content as FlipView;
             if (flipView != null)
             {
-                var word = flipView.SelectedItem as NewWord;
+                var word = flipView.SelectedItem as Vocabulary;
                 word.WordMeaningVisible = !word.WordMeaningVisible;
 
                 ViewAppBarButton.Label = word.WordMeaningVisible ? "隐藏释义" : "显示释义";
@@ -151,8 +160,8 @@ namespace CollegeEnglish
             var flipView = pivotItem.Content as FlipView;
             if (flipView != null)
             {
-                var word = flipView.SelectedItem as NewWord;
-                await ReadVoice(word.WordVoice);
+                var word = flipView.SelectedItem as Vocabulary;
+                await ReadVoice(word.Voice);
             }
         }
 
@@ -206,7 +215,7 @@ namespace CollegeEnglish
             }
 
             var course = await VocabularyDataSource.GetCourseAsync(courseId: CurrentCouseId);
-            this.DefaultViewModel["NewWords"] = course.NewWords;
+            this.DefaultViewModel["NewWords"] = course.Vocabularies;
         }
     }
 

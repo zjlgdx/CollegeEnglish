@@ -107,11 +107,11 @@ namespace CollegeEnglish.Common
         public static async Task<string> GetCourse(string courseId)
         {
             var bookId = courseId.Substring(0, 1);
-
+            var unitIndex = GetUnitFolder(courseId);
             var subfolder = Constants.DATA_BASE_PATH + ("integrated" + bookId);
-            var subsubfolder = subfolder + "/" + (GetUnitFolder(courseId));
+            var subsubfolder = subfolder + "/" + unitIndex;
 
-            var file = subsubfolder + "/" + (GetUnitJsonFileFolder(courseId));
+            var file = subsubfolder + "/" + (GetUnitJsonFileFolder(courseId, unitIndex));
             StorageFile sourceFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(file.Replace("\\", "/")));
             string result = await FileIO.ReadTextAsync(sourceFile);
             return result;
@@ -121,17 +121,17 @@ namespace CollegeEnglish.Common
         {
             var index = courseId.IndexOf("/");
             var unitIndex = courseId.Substring(index + 1, 2);
-            return "Unit" + unitIndex;
+            return unitIndex;
         }
 
-        private static string GetUnitJsonFileFolder(string courseId)
+        private static string GetUnitJsonFileFolder(string courseId, string unitIndex)
         {
             if (courseId.Contains("p3newword1"))
             {
-                return "TextB.json";
+                return unitIndex+"_B.json";
             }
 
-            return "TextA.json";
+            return unitIndex + "_A.json";
         }
 
         //E:\collegeEnglish\integrated1\unitlist

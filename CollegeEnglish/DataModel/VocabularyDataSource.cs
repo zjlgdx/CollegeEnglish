@@ -13,11 +13,11 @@ namespace CollegeEnglish.DataModel
     {
         private static VocabularyDataSource _vocabularyDataSource = new VocabularyDataSource();
 
-        public Course Course { get; private set; }
+        public Unit Course { get; private set; }
 
         private string courseId;
 
-        public static async Task<Course> GetCourseAsync(string courseId)
+        public static async Task<Unit> GetCourseAsync(string courseId)
         {
             await _vocabularyDataSource.GetDataAsync(courseId);
 
@@ -39,21 +39,27 @@ namespace CollegeEnglish.DataModel
 
             string jsonText = await StorageDataHelper.GetCourse(courseId);
             JsonObject jsonObject = JsonObject.Parse(jsonText);
-            JsonArray jsonArray = jsonObject["NewWords"].GetArray();
+            JsonArray jsonArray = jsonObject["Vocabularies"].GetArray();
 
-            this.Course = new Course { CourseId = jsonObject["CourseId"].ToJsonString(), CourseName = jsonObject["CourseName"].ToJsonString(), NewWords = new List<NewWord>() };
-
+            //this.Course = new Course { CourseId = jsonObject["CourseId"].ToJsonString(), CourseName = jsonObject["CourseName"].ToJsonString(), NewWords = new List<NewWord>() };
+            this.Course = new Unit { UnitTitle = jsonObject["UnitTitle"].ToJsonString(), Vocabularies = new List<Vocabulary>() };
+            var lessionId = courseId.Substring(0, 1);
+            var basePath = Constants.DATA_BASE_PATH + "integrated" + lessionId + "/";
             foreach (JsonValue wordValue in jsonArray)
             {
                 JsonObject unitObject = wordValue.GetObject();
-                NewWord newWord = new NewWord(unitObject["WordId"].ToJsonString(),
-                                              unitObject["Word"].ToJsonString(),
-                                              unitObject["WordVoice"].ToJsonString(Constants.DATA_BASE_PATH),
-                                              unitObject["WordPhrase"].ToJsonString(),
-                                              unitObject["Sentence"].ToJsonString(),
-                                              unitObject["SentenceVoice"].ToJsonString(Constants.DATA_BASE_PATH));
-
-                this.Course.NewWords.Add(newWord);
+                //NewWord newWord = new NewWord(unitObject["WordId"].ToJsonString(),
+                //                              unitObject["Word"].ToJsonString(),
+                //                              unitObject["WordVoice"].ToJsonString(Constants.DATA_BASE_PATH),
+                //                              unitObject["WordPhrase"].ToJsonString(),
+                //                              unitObject["Sentence"].ToJsonString(),
+                //                              unitObject["SentenceVoice"].ToJsonString(Constants.DATA_BASE_PATH));
+                var vocabulary = new Vocabulary(unitObject["Word"].ToJsonString()
+                                               , unitObject["Voice"].ToJsonString(basePath)
+                                               , unitObject["Definition"].ToJsonString()
+                                               , unitObject["Paraphrase"].ToJsonString()
+                                               , unitObject["ParaphraseVoice"].ToJsonString(basePath));
+                this.Course.Vocabularies.Add(vocabulary);
             }
         }
     }
