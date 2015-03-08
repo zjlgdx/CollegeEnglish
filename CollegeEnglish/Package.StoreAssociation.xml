@@ -189,6 +189,16 @@
       <ReservedName>大学综合英语词汇</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
-  <AccountPackageIdentityNames />
-  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=57697c6e-27d8-4766-a348-b7033e53a73d" />
+  <AccountPackageIdentityNames>
+    <MainPackageIdentityName>37940YvanYang.51VOALearningEnglish</MainPackageIdentityName>
+    <MainPackageIdentityName>37940YvanYang.NCE</MainPackageIdentityName>
+    <MainPackageIdentityName>37940YvanYang.46607ABF21476</MainPackageIdentityName>
+  </AccountPackageIdentityNames>
+  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=57697c6e-27d8-4766-a348-b7033e53a73d">
+    <PackageInfo>
+      <OsMinVersion>6.3.0.0</OsMinVersion>
+      <PackageArchitecture>neutral</PackageArchitecture>
+      <PackageMaxArchitectureVersion>1.1.0.1</PackageMaxArchitectureVersion>
+    </PackageInfo>
+  </PackageInfoList>
 </StoreAssociation>
